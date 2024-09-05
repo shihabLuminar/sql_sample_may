@@ -14,7 +14,7 @@ class HomeScreenController {
       path = 'my_web_web.db';
     }
 
-    database = await openDatabase("mydb.db", version: 1,
+    database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       // When creating the db, create the table
       await db.execute(
