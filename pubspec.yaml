@@ -32,6 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   sqflite: ^2.3.3+1
+  sqflite_common_ffi_web: ^0.4.4
 
 dev_dependencies:
 

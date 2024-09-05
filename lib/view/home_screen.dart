@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sql_sample_may/controller/home_screen_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -107,7 +108,13 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 20),
 
               InkWell(
-                onTap: () async {},
+                onTap: () async {
+                  await HomeScreenController.addEmployee(
+                      name: nameContorller.text,
+                      designation: designationContrller.text);
+                  await HomeScreenController.getEmployees();
+                  setState(() {});
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   alignment: Alignment.center,
@@ -125,6 +132,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              Expanded(
+                  child: ListView.builder(
+                itemCount: HomeScreenController.myDataList.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(HomeScreenController.myDataList[index]["name"]),
+                  subtitle: Text(
+                      HomeScreenController.myDataList[index]["designation"]),
+                  trailing: IconButton(
+                      onPressed: () async {
+                        await HomeScreenController.deleteEmployee(
+                            HomeScreenController.myDataList[index]["id"]);
+                        setState(() {});
+                      },
+                      icon: Icon(Icons.delete)),
+                ),
+              ))
             ],
           ),
         ),
